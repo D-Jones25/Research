@@ -1,0 +1,26 @@
+Selective Learnability Lock - “SLL uses a surrogate GCN to approximate the downstream user and optimizes the topology of the graph to 
+  maximize loss on the protected nodes while minimizing loss on the other nodes. A gradient guidance optimization is implemented in SLL 
+  to allow it to be more robust and efficienct with regard to dataset size. SLL is experimentally effective, providing a better solution 
+  than existing possibilities such as simplistic solutions or random noise, and can be extended to apply to multi-task scenarios.”
+
+Analyzed protected and authorized nodes (avg degree, centrality, clustering, k-hop neighborhood, random-walk ratio of protected to authorized,)
+
+Implemented various model types to test on SLL (GIN, GraphSAGE, GAT)
+
+Tested various training data splits (original paper split, ~equal class ratio split, ~class split to the ratio of the classes in entire dataset)
+
+Implemented Correct&Smooth Algorithm
+
+Built a new model, GCN_CS, which incorporated correct&smooth into the GCN surrogate model
+
+Plotted various graph representations of the predicted outcomes
+
+Built complement graph (graph made of all potential edges not in original graph)
+This was too large so 2-hop neighbor heuristic complement graph was used instead
+
+
+Used GNNExplainer to explain predictions made after graph was modified
+
+Analyzed graph changes after applying SLL (edges added/removed and between whom)
+
+
