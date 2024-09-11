@@ -1,0 +1,19 @@
+Aptoide Vault App Analysis
+
+Example Abstract/Work Summary:
+	A list of mobile apps from the Aptoide Store were gathered to form a dataset with the purpose of identifying “vault apps” 
+(apps which appear to be normal apps but contain a secret vault with the purpose of hiding / protecting information behind a secret passcode). 
+The dataset was small and many of the apps in the dataset were missing attributes such as number of downloads, 
+links to recommended apps, descriptions, etc. I first built a web scraper to comb through all of the apps in the dataset and gather feature
+information for those apps missing them. Then, once all apps had the required common features, I performed a feature transformation 
+to get all the features into a usable format. For example, the number of downloads per app was in string format. 
+Aptoide displays the number of downloads using letters to represent common large number formats such as “676.4K” for 676,400 
+or 1.3M for 1,300,000. To correct this I wrote a function to remove punctuation and replace letters with their numeric equivalents 
+before converting all of the values to tensors so that they could be fed into the ML models. 
+I also utilized natural language processing models like sentence transformer to convert the description and title features from 
+string to tensor format. I then split the features into training features and labels (vault or no-vault) and split the data into training 
+and testing sets. A variety of models were tested (RandomForest, XGBoost, GCN, NN) to compare performance. 
+Due to the large imbalance of the dataset (most apps are not vault apps), I used class weighting and resampling techniques to account 
+for this imbalance. A grid search was used on Random Forest to determine the best weighting by F1-Score. Once predictions had been made, 
+I used SHAP values to explain the predictions and get the most important features for XGBoost and RandomForest. I also used GNNExplainer 
+to do the same for the GCN. 
